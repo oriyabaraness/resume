@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Side Projects — Oriya Baraness</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243360;
+      --accent: #2e6fce;
+      --accent-soft: #e8f0fc;
+      --text: #1e1e2e;
+      --muted: #5a607a;
+      --line: #d6dce8;
+      --white: #ffffff;
+      --bg: #f5f7fb;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 960px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(26,39,68,.12);
+    }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 36px 48px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: .4px;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-size: .92rem;
+      color: #a8bde0;
+    }
+
+    /* TAB NAV */
+    .tab-nav {
+      background: var(--navy);
+      display: flex;
+      gap: 2px;
+      padding: 0 40px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .tab-nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #7a9fd4;
+      padding: 11px 16px;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab-nav a:hover { color: #c5d4ec; }
+    .tab-nav a.active { color: #ffffff; border-bottom-color: var(--accent); }
+
+    /* CONTENT */
+    .content { padding: 48px 48px; }
+
+    /* EMPTY STATE */
+    .empty-state {
+      text-align: center;
+      padding: 64px 24px;
+      color: var(--muted);
+    }
+
+    .empty-state .empty-icon {
+      font-size: 2.8rem;
+      margin-bottom: 16px;
+      opacity: .4;
+    }
+
+    .empty-state h2 {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 8px;
+    }
+
+    .empty-state p {
+      font-size: .9rem;
+      max-width: 360px;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 700px) {
+      .content { padding: 28px 24px; }
+      header { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Side Projects</h1>
+    <p class="header-sub">Personal &amp; independent work outside of professional roles</p>
+  </header>
+
+  <nav class="tab-nav">
+    <a href="index.html">Resume</a>
+    <a href="courses.html">Courses</a>
+    <a href="side-projects.html" class="active">Side Projects</a>
+  </nav>
+
+  <div class="content">
+    <div class="empty-state">
+      <div class="empty-icon">🛠</div>
+      <h2>Coming Soon</h2>
+      <p>Side projects will be listed here.</p>
+    </div>
+  </div>
+
+</div>
+</body>
+</html>

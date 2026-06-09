@@ -1,0 +1,554 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Oriya Baraness — Resume</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243360;
+      --accent: #2e6fce;
+      --accent-soft: #e8f0fc;
+      --text: #1e1e2e;
+      --muted: #5a607a;
+      --line: #d6dce8;
+      --white: #ffffff;
+      --bg: #f5f7fb;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    /* ── LAYOUT ── */
+    .page {
+      max-width: 900px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(26,39,68,.12);
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 44px 48px 36px;
+      display: flex;
+      align-items: center;
+      gap: 32px;
+    }
+
+    .header-photo {
+      flex-shrink: 0;
+      width: 110px;
+      height: 110px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid rgba(255,255,255,.25);
+      box-shadow: 0 4px 16px rgba(0,0,0,.25);
+    }
+
+    .header-text { flex: 1; }
+
+    header h1 {
+      font-size: 2.2rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      margin-bottom: 6px;
+    }
+
+    .tagline {
+      font-size: .95rem;
+      color: #a8bde0;
+      font-weight: 400;
+      margin-bottom: 20px;
+      letter-spacing: .3px;
+    }
+
+    .contact-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 24px;
+      font-size: .88rem;
+      color: #c5d4ec;
+    }
+
+    .contact-row span {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .contact-row .icon {
+      font-size: 1rem;
+      opacity: .8;
+    }
+
+    /* ── BODY ── */
+    .body { display: grid; grid-template-columns: 1fr 280px; }
+
+    main { padding: 36px 40px 40px; border-right: 1px solid var(--line); }
+    aside { padding: 36px 28px 40px; background: var(--bg); }
+
+    /* ── SECTION TITLES ── */
+    .section { margin-bottom: 32px; }
+    .section:last-child { margin-bottom: 0; }
+
+    .section-title {
+      font-size: .72rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 14px;
+      padding-bottom: 6px;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    /* ── SUMMARY ── */
+    .summary p {
+      color: var(--muted);
+      font-size: .93rem;
+      line-height: 1.75;
+    }
+
+    /* ── EXPERIENCE ── */
+    .job { margin-bottom: 26px; }
+    .job:last-child { margin-bottom: 0; }
+
+    .job-header { margin-bottom: 2px; }
+
+    .job-title {
+      font-size: 1rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .job-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      flex-wrap: wrap;
+      gap: 2px;
+      margin: 2px 0 8px;
+    }
+
+    .employer {
+      font-size: .88rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .period {
+      font-size: .82rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .job ul {
+      list-style: none;
+      padding: 0;
+    }
+
+    .job ul li {
+      font-size: .88rem;
+      color: var(--muted);
+      line-height: 1.65;
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 4px;
+    }
+
+    .job ul li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: var(--accent);
+      font-size: .75rem;
+      top: 3px;
+    }
+
+    /* ── ASIDE SECTIONS ── */
+    .aside-section { margin-bottom: 28px; }
+    .aside-section:last-child { margin-bottom: 0; }
+
+    .aside-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 1.6px;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 12px;
+      padding-bottom: 5px;
+      border-bottom: 2px solid var(--line);
+    }
+
+    /* ── COMPETENCIES ── */
+    .tags { display: flex; flex-wrap: wrap; gap: 7px; }
+
+    .tag {
+      background: var(--accent-soft);
+      color: var(--navy);
+      font-size: .78rem;
+      font-weight: 500;
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid #c5d6f5;
+    }
+
+    /* ── EDUCATION ── */
+    .edu { margin-bottom: 16px; }
+    .edu:last-child { margin-bottom: 0; }
+
+    .edu-degree {
+      font-size: .9rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    .edu-school {
+      font-size: .82rem;
+      color: var(--accent);
+      margin: 2px 0;
+    }
+
+    .edu-year {
+      font-size: .8rem;
+      color: var(--muted);
+    }
+
+    /* ── TARGET ROLES ── */
+    .roles-section {
+      background: var(--navy);
+      margin: -36px -28px 28px;
+      padding: 24px 28px 20px;
+      border-radius: 0;
+    }
+
+    .roles-section .aside-title {
+      color: #a8bde0;
+      border-bottom-color: rgba(255,255,255,.15);
+    }
+
+    .role-list {
+      list-style: none;
+      padding: 0;
+    }
+
+    .role-list li {
+      font-size: .92rem;
+      font-weight: 500;
+      color: #e2eaf8;
+      padding: 7px 0 7px 18px;
+      position: relative;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      line-height: 1.4;
+    }
+
+    .role-list li:last-child { border-bottom: none; }
+
+    .role-list li::before {
+      content: '▸';
+      position: absolute;
+      left: 0;
+      color: #5b9cf6;
+      font-size: .78rem;
+      top: 9px;
+    }
+
+    /* ── AWARDS ── */
+    .award-item {
+      font-size: .85rem;
+      color: var(--muted);
+      padding-left: 14px;
+      position: relative;
+      margin-bottom: 7px;
+      line-height: 1.5;
+    }
+
+    .award-item::before {
+      content: '★';
+      position: absolute;
+      left: 0;
+      color: #f0b429;
+      font-size: .7rem;
+      top: 3px;
+    }
+
+    /* ── INFO LIST ── */
+    .info-list { list-style: none; }
+
+    .info-list li {
+      font-size: .85rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+      display: flex;
+      gap: 8px;
+      align-items: flex-start;
+      line-height: 1.5;
+    }
+
+    .info-list li .label {
+      font-weight: 600;
+      color: var(--text);
+      min-width: 72px;
+      flex-shrink: 0;
+    }
+
+    /* ── PRINT ── */
+    @media print {
+      body { background: white; font-size: 13px; }
+      .page { box-shadow: none; margin: 0; border-radius: 0; }
+    }
+
+    /* ── TAB NAV ── */
+    .tab-nav {
+      background: var(--navy);
+      display: flex;
+      gap: 2px;
+      padding: 0 40px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .tab-nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #7a9fd4;
+      padding: 11px 16px;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab-nav a:hover { color: #c5d4ec; }
+    .tab-nav a.active { color: #ffffff; border-bottom-color: var(--accent); }
+
+    @media (max-width: 680px) {
+      .body { grid-template-columns: 1fr; }
+      aside { border-top: 1px solid var(--line); }
+      main { border-right: none; }
+      header { padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      .header-photo { width: 80px; height: 80px; }
+      main, aside { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <!-- HEADER -->
+  <header>
+    <img src="photo.png" alt="Oriya Baraness" class="header-photo" />
+    <div class="header-text">
+    <h1>Oriya Baraness</h1>
+    <p class="tagline">Enterprise Resilience &nbsp;|&nbsp; Operational Risk &nbsp;|&nbsp; Critical Infrastructure &nbsp;|&nbsp; Security Strategy</p>
+    <div class="contact-row">
+      <span><span class="icon">📍</span> Tel Aviv, Israel</span>
+      <span><span class="icon">✉️</span> <a href="mailto:Oriyabaraness@gmail.com" style="color:#c5d4ec;">Oriyabaraness@gmail.com</a></span>
+      <span><span class="icon">🌐</span> Canadian &amp; Israeli Citizen</span>
+      <span><span class="icon">🔗</span> <a href="https://www.linkedin.com/in/oriyabaraness/" target="_blank" style="color:#a8bde0;">LinkedIn</a></span>
+    </div>
+    </div>
+  </header>
+
+  <nav class="tab-nav">
+    <a href="index.html" class="active">Resume</a>
+    <a href="courses.html">Courses</a>
+    <a href="side-projects.html">Side Projects</a>
+  </nav>
+
+  <div class="body">
+
+    <!-- MAIN COLUMN -->
+    <main>
+
+      <!-- SUMMARY -->
+      <div class="section summary">
+        <div class="section-title">Professional Summary</div>
+        <p>
+          Enterprise resilience and security professional with experience spanning financial services, government, and national security environments. Specialized in operational resilience, business continuity, critical infrastructure protection, crisis management, and geopolitical risk analysis. Proven ability to coordinate cross-functional stakeholders, develop contingency frameworks, and support enterprise resilience initiatives in highly regulated and high-risk environments including Citi Bank Israel and the Canadian Department of National Defence. Experienced in cyber-adjacent risk management, OSINT research, strategic policy development, and operational continuity planning. Strong background working with senior government officials, financial institutions, and intergovernmental stakeholders on resilience governance and security initiatives.
+        </p>
+      </div>
+
+      <!-- EXPERIENCE -->
+      <div class="section">
+        <div class="section-title">Professional Experience</div>
+
+        <div class="job">
+          <div class="job-title">Business Continuity &amp; Enterprise Resilience Coordinator</div>
+          <div class="job-meta">
+            <span class="employer">CitiBank Israel — Tel Aviv, Israel</span>
+            <span class="period">Jun 2024 – Present</span>
+          </div>
+          <ul>
+            <li>Lead enterprise resilience and operational continuity initiatives for Citi Israel's banking operations and Innovation Lab in alignment with Bank of Israel regulatory requirements and global Citi resilience standards.</li>
+            <li>Develop crisis response and contingency frameworks addressing warfare scenarios, cyber incidents, operational disruptions, and third-party outages across 15+ business units including Markets, Securities Services, Treasury Trade Solutions, Technology, Client Onboarding, and Private Wealth.</li>
+            <li>Coordinate enterprise-wide Denial of Service/Denial of Access (DoS/DoA) testing, resilience exercises, and recovery planning initiatives involving internal stakeholders and external financial ecosystem partners including MASAV, TASE, and Bloomberg.</li>
+            <li>Conduct dependency mapping, application risk assessments, alternate-site planning, and recovery strategy reviews to strengthen operational recovery capabilities and reduce business disruption risks.</li>
+            <li>Support resilience governance initiatives by partnering with technology, operations, compliance, and business leadership to identify remediation priorities and strengthen continuity preparedness.</li>
+            <li>Manage continuity planning documentation, recovery procedures, and resilience reporting while supporting alignment with operational risk and regulatory expectations.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Senior Corporate Officer – Business Continuity &amp; Resilience</div>
+          <div class="job-meta">
+            <span class="employer">Department of National Defence — Ottawa, Canada</span>
+            <span class="period">Jun 2022 – Nov 2024</span>
+          </div>
+          <ul>
+            <li>Supported continuity and recovery planning for critical government operations, military assets, and intergovernmental communication infrastructure within the Vice Chief of the Defence Staff Group.</li>
+            <li>Collaborated with senior stakeholders across the Canadian Armed Forces, Treasury Board Secretariat, and Global Affairs Canada to strengthen resilience governance and continuity coordination across domestic and international operations.</li>
+            <li>Co-authored resilience directives, continuity policies, risk mitigation procedures, and operational guidance supporting compliance with Treasury Board business continuity planning requirements.</li>
+            <li>Led resilience workshops, continuity planning sessions, and tabletop exercises for senior military leadership focused on crisis preparedness, operational continuity, and emergency response coordination.</li>
+            <li>Supported redundancy planning and operational recovery efforts for critical communication networks and high-priority government services to minimize disruption during crisis scenarios.</li>
+            <li>Managed annual continuity planning coordination activities, resilience reporting, and cross-functional stakeholder engagement for senior defence leadership teams.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">Research Analyst</div>
+          <div class="job-meta">
+            <span class="employer">Government of Canada – House of Commons — Ottawa, Canada</span>
+            <span class="period">Oct 2021 – Apr 2022</span>
+          </div>
+          <ul>
+            <li>Conducted policy analysis and expenditure reviews related to federal government operations, Treasury Board initiatives, and parliamentary committee activities.</li>
+            <li>Prepared research briefs, investigative reports, and legislative documentation related to geopolitical issues, government operations, and federal expenditures.</li>
+            <li>Managed constituent inquiries related to immigration, employment insurance, COVID-related federal benefits, and public service matters while ensuring accurate and timely support.</li>
+            <li>Performed investigative and policy research supporting parliamentary decision-making and public transparency initiatives.</li>
+          </ul>
+        </div>
+
+        <div class="job">
+          <div class="job-title">OSINT &amp; Extremism Research Analyst</div>
+          <div class="job-meta">
+            <span class="employer">Organization for the Prevention of Violence — Edmonton, Canada</span>
+            <span class="period">May 2020 – Jun 2021</span>
+          </div>
+          <ul>
+            <li>Conducted open-source intelligence (OSINT) research focused on extremism, hate movements, online radicalization, and counterterrorism-related trends.</li>
+            <li>Supported strategic assessments and evidence-based research initiatives related to fringe ideologies and digital threat narratives.</li>
+            <li>Analyzed online platforms and digital communities to identify emerging extremist narratives and behavioral patterns.</li>
+            <li>Translated multilingual source material from Russian, Ukrainian, and German into English to support security and policy research initiatives.</li>
+          </ul>
+        </div>
+
+      </div>
+    </main>
+
+    <!-- SIDEBAR -->
+    <aside>
+
+      <!-- TARGET ROLES -->
+      <div class="aside-section roles-section">
+        <div class="aside-title">Target Roles</div>
+        <ul class="role-list">
+          <li>Business Continuity Manager</li>
+          <li>Enterprise Resilience Manager</li>
+          <li>Operational Risk Manager</li>
+          <li>Crisis Management Specialist</li>
+          <li>Critical Infrastructure Protection Analyst</li>
+          <li>Geopolitical &amp; Security Risk Analyst</li>
+          <li>Intelligence / OSINT Analyst</li>
+          <li>Security Policy Advisor</li>
+          <li>Resilience Program Manager</li>
+          <li>Third-Party Risk Manager</li>
+        </ul>
+      </div>
+
+      <!-- COMPETENCIES -->
+      <div class="aside-section">
+        <div class="aside-title">Core Competencies</div>
+        <div class="tags">
+          <span class="tag">Operational Resilience</span>
+          <span class="tag">Business Continuity</span>
+          <span class="tag">Enterprise Risk Mgmt</span>
+          <span class="tag">Crisis Management</span>
+          <span class="tag">Critical Infrastructure</span>
+          <span class="tag">Geopolitical Risk</span>
+          <span class="tag">OSINT Research</span>
+          <span class="tag">Regulatory Compliance</span>
+          <span class="tag">Cybersecurity Governance</span>
+          <span class="tag">Dependency Mapping</span>
+          <span class="tag">Incident Response</span>
+          <span class="tag">Risk Assessment</span>
+          <span class="tag">Stakeholder Management</span>
+          <span class="tag">Continuity Testing</span>
+          <span class="tag">Policy Development</span>
+          <span class="tag">Third-Party Risk</span>
+          <span class="tag">Crisis Coordination</span>
+          <span class="tag">Power BI</span>
+          <span class="tag">STATA</span>
+          <span class="tag">Data Analytics</span>
+        </div>
+      </div>
+
+      <!-- EDUCATION -->
+      <div class="aside-section">
+        <div class="aside-title">Education</div>
+
+        <div class="edu">
+          <div class="edu-degree">M.A. Infrastructure Protection &amp; International Security</div>
+          <div class="edu-school">Carleton University — Ottawa, Canada</div>
+          <div class="edu-year">Sept 2021 – Jun 2023</div>
+          <a href="courses.html" style="display:inline-block;margin-top:6px;font-size:.78rem;font-weight:600;color:var(--accent);background:var(--accent-soft);border:1px solid #c5d6f5;border-radius:4px;padding:3px 9px;letter-spacing:.4px;">View Courses →</a>
+        </div>
+
+        <div class="edu">
+          <div class="edu-degree">B.A. Political Science &amp; Psychology Minor</div>
+          <div class="edu-school">University of Alberta — Edmonton, Canada</div>
+          <div class="edu-year">Sept 2019 – Jun 2021</div>
+        </div>
+      </div>
+
+      <!-- AWARDS -->
+      <div class="aside-section">
+        <div class="aside-title">Awards &amp; Development</div>
+        <div class="award-item">Co-op Student of the Year — Vice Chief of Defence Staff Group, DND (2022)</div>
+        <div class="award-item">NATO School Oberammergau — Germany (2023)</div>
+        <div class="award-item">Nominee, Carleton University Research Grant on Smart Cities &amp; Risks (2021)</div>
+        <div class="award-item">Rogers Smith Undergraduate Research Grant, University of Alberta (2021)</div>
+      </div>
+
+      <!-- ADDITIONAL -->
+      <div class="aside-section">
+        <div class="aside-title">Additional Information</div>
+        <ul class="info-list">
+          <li>
+            <span class="label">Clearance</span>
+            <span>Active Canadian Security Clearance (NATO)</span>
+          </li>
+          <li>
+            <span class="label">Languages</span>
+            <span>English (Native), Hebrew (Native), French (Intermediate)</span>
+          </li>
+          <li>
+            <span class="label">Tools</span>
+            <span>Claude Code, Power BI, STATA, Microsoft Excel, D365, Fusion Risk Management</span>
+          </li>
+          <li>
+            <span class="label">Citizenship</span>
+            <span>Canadian &amp; Israeli</span>
+          </li>
+        </ul>
+      </div>
+
+    </aside>
+  </div>
+</div>
+</body>
+</html>

@@ -1,0 +1,437 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courses — Oriya Baraness</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243360;
+      --accent: #2e6fce;
+      --accent-soft: #e8f0fc;
+      --text: #1e1e2e;
+      --muted: #5a607a;
+      --line: #d6dce8;
+      --white: #ffffff;
+      --bg: #f5f7fb;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 960px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(26,39,68,.12);
+    }
+
+    /* HEADER */
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 36px 48px;
+    }
+
+    /* TAB NAV */
+    .tab-nav {
+      background: var(--navy);
+      display: flex;
+      gap: 2px;
+      padding: 0 40px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .tab-nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #7a9fd4;
+      padding: 11px 16px;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab-nav a:hover { color: #c5d4ec; }
+    .tab-nav a.active { color: #ffffff; border-bottom-color: #2e6fce; }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: .4px;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-size: .92rem;
+      color: #a8bde0;
+    }
+
+    /* CONTENT */
+    .content { padding: 40px 48px; }
+
+    /* DEGREE BLOCK */
+    .degree-block { margin-bottom: 52px; }
+    .degree-block:last-child { margin-bottom: 0; }
+
+    .degree-label {
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 28px;
+      padding-bottom: 10px;
+      border-bottom: 2px solid var(--accent-soft);
+    }
+
+    .degree-label h2 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .degree-label .school {
+      font-size: .85rem;
+      color: var(--accent);
+      font-weight: 500;
+    }
+
+    .degree-label .years {
+      font-size: .82rem;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    /* SEMESTER */
+    .semester { margin-bottom: 32px; }
+    .semester:last-child { margin-bottom: 0; }
+
+    .semester-title {
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 14px;
+    }
+
+    /* COURSE GRID */
+    .course-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+      gap: 14px;
+    }
+
+    /* COURSE CARD */
+    .course-card {
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      overflow: hidden;
+      transition: box-shadow .15s, border-color .15s;
+    }
+
+    .course-card.linked:hover {
+      box-shadow: 0 4px 16px rgba(46,111,206,.12);
+      border-color: #b3c9f0;
+    }
+
+    .card-header {
+      padding: 14px 18px 12px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .course-name {
+      font-size: .93rem;
+      font-weight: 600;
+      color: var(--navy);
+      line-height: 1.4;
+    }
+
+    .course-code {
+      font-size: .75rem;
+      color: var(--muted);
+      font-weight: 400;
+      margin-top: 2px;
+    }
+
+    .badge {
+      flex-shrink: 0;
+      font-size: .68rem;
+      font-weight: 700;
+      letter-spacing: .8px;
+      text-transform: uppercase;
+      padding: 3px 9px;
+      border-radius: 4px;
+      white-space: nowrap;
+      margin-top: 2px;
+    }
+
+    .badge-syllabus {
+      background: var(--accent);
+      color: var(--white);
+    }
+
+    .badge-download {
+      background: #2e8b57;
+      color: var(--white);
+    }
+
+    .badge-none {
+      background: var(--line);
+      color: var(--muted);
+    }
+
+    .card-body {
+      padding: 12px 18px 14px;
+    }
+
+    .course-desc {
+      font-size: .85rem;
+      color: var(--muted);
+      line-height: 1.6;
+      margin-bottom: 10px;
+    }
+
+    .syllabus-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--accent);
+      padding: 4px 0;
+      transition: opacity .15s;
+    }
+    .syllabus-link:hover { opacity: .75; }
+
+    /* UNDERGRAD PLACEHOLDER */
+    .empty-note {
+      font-size: .88rem;
+      color: var(--muted);
+      font-style: italic;
+      padding: 4px 0;
+    }
+
+    @media (max-width: 700px) {
+      .content { padding: 28px 24px; }
+      header { padding: 28px 24px; }
+      .course-grid { grid-template-columns: 1fr; }
+    }
+
+  </style>
+</head>
+<body>
+
+<div class="page">
+
+  <header>
+    <h1>Academic Coursework</h1>
+    <p class="header-sub">M.A. Infrastructure Protection &amp; International Security &nbsp;·&nbsp; Carleton University</p>
+  </header>
+
+  <nav class="tab-nav">
+    <a href="index.html">Resume</a>
+    <a href="courses.html" class="active">Courses</a>
+    <a href="side-projects.html">Side Projects</a>
+  </nav>
+
+  <div class="content">
+
+    <!-- MASTER'S -->
+    <div class="degree-block">
+      <div class="degree-label">
+        <div>
+          <h2>M.A. — Infrastructure Protection &amp; International Security</h2>
+          <div class="school">Carleton University &nbsp;·&nbsp; Ottawa, Canada</div>
+        </div>
+        <span class="years">Sept 2021 – Jun 2023</span>
+      </div>
+
+      <!-- FALL 2021 -->
+      <div class="semester">
+        <div class="semester-title">Fall 2021</div>
+        <div class="course-grid">
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">National Security Policy &amp; Law</div>
+                <div class="course-code">INAF 5234 / IPIS 5305</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Examined Canadian and international legal frameworks governing national security — including terrorism, foreign interference, and intelligence law — with a focus on how legal tools shape the mandates of Canada's security agencies and the accountability structures that constrain them.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Critical Infrastructure Protection: Issues &amp; Strategies</div>
+                <div class="course-code">IPIS 5101</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Conceptual foundations of critical infrastructure protection — interdependency, resilience theory, threat taxonomies, and sector-specific protection strategies.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Management of Critical Infrastructure</div>
+                <div class="course-code">IPIS 5106</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Operations, maintenance, and capital planning for public infrastructure assets; asset management frameworks, lifecycle analysis, and capital investment decision-making.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WINTER 2022 -->
+      <div class="semester">
+        <div class="semester-title">Winter 2022</div>
+        <div class="course-grid">
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Infrastructure Engineering Principles</div>
+                <div class="course-code">IPIS 5103</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Applied core engineering principles — structural analysis, design loads, blast and wind effects, dam stability — to the protection of critical infrastructure, building the technical vocabulary to assess vulnerabilities and evaluate retrofitting options against natural and man-made hazards.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Critical Infrastructure Risk Assessment</div>
+                <div class="course-code">IPIS 5105</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Hands-on application of Canada's Harmonized Threat and Risk Assessment (HTRA) methodology — identifying assets, assessing threats and vulnerabilities, and producing a defensible TRA report in partnership with the Canadian Nuclear Safety Commission and Health Canada.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Emergency &amp; Business Continuity</div>
+                <div class="course-code">IPIS 5306</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Explored emergency management and business continuity management (BCM) for critical infrastructure, applying international standards (ISO 22301, CZ1600) through business impact analyses, BCM program design, and a tabletop exercise simulating a real disruptive event.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- FALL 2022 -->
+      <div class="semester">
+        <div class="semester-title">Fall 2022</div>
+        <div class="course-grid">
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Intelligence Studies</div>
+                <div class="course-code">INAF 5204 / IPIS 5303</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Surveyed intelligence theory and practice — collection, analysis, failure, and reform — through a lens that included non-Western perspectives and real-world cases, delivered in partnership with CANSOFCOM to develop professional analytical and briefing skills.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Natural Hazards</div>
+                <div class="course-code">IPIS 5505 / ERTH 5215</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Covered the science, societal impact, and mitigation of natural hazards in Canada — seismic, hydrological, atmospheric, and space weather — taught with Natural Resources Canada specialists to integrate hazard science directly into infrastructure protection and emergency planning.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- WINTER 2023 -->
+      <div class="semester">
+        <div class="semester-title">Winter 2023</div>
+        <div class="course-grid">
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Cybersecurity in Canada</div>
+                <div class="course-code">INAF 5225</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Canadian cybersecurity policy, threat landscape, and regulatory environment — covering data breaches, incident response, vulnerability management, and the intersection of cyber operations with national security.</p>
+            </div>
+          </div>
+
+          <div class="course-card">
+            <div class="card-header">
+              <div>
+                <div class="course-name">Explosives &amp; Weapons of Mass Disruption</div>
+                <div class="course-code">IPIS 5508</div>
+              </div>
+            </div>
+            <div class="card-body">
+              <p class="course-desc">Introduced the physics of chemical explosives and blast effects on structures and human populations, developing practical assessment skills applicable to accidental explosions, terrorist attacks, and the protective design of critical infrastructure.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+
+    <!-- UNDERGRAD -->
+    <div class="degree-block">
+      <div class="degree-label">
+        <div>
+          <h2>B.A. — Political Science &amp; Psychology Minor</h2>
+          <div class="school">University of Alberta &nbsp;·&nbsp; Edmonton, Canada</div>
+        </div>
+        <span class="years">Sept 2019 – Jun 2021</span>
+      </div>
+      <p class="empty-note">Undergraduate courses will be added here.</p>
+    </div>
+
+  </div>
+</div>
+</body>
+</html>
