@@ -1,0 +1,288 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Books I Am Reading — Oriya Baraness</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --navy: #1a2744;
+      --navy-light: #243360;
+      --accent: #2e6fce;
+      --accent-soft: #e8f0fc;
+      --text: #1e1e2e;
+      --muted: #5a607a;
+      --line: #d6dce8;
+      --white: #ffffff;
+      --bg: #f5f7fb;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      font-size: 15px;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .page {
+      max-width: 960px;
+      margin: 40px auto;
+      background: var(--white);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 32px rgba(26,39,68,.12);
+    }
+
+    header {
+      background: var(--navy);
+      color: var(--white);
+      padding: 36px 48px;
+    }
+
+    header h1 {
+      font-size: 1.8rem;
+      font-weight: 700;
+      letter-spacing: .4px;
+      margin-bottom: 4px;
+    }
+
+    .header-sub {
+      font-size: .92rem;
+      color: #a8bde0;
+    }
+
+    .tab-nav {
+      background: var(--navy);
+      display: flex;
+      gap: 2px;
+      padding: 0 40px;
+      border-bottom: 1px solid rgba(255,255,255,.1);
+    }
+
+    .tab-nav a {
+      font-size: .82rem;
+      font-weight: 600;
+      letter-spacing: .6px;
+      text-transform: uppercase;
+      color: #7a9fd4;
+      padding: 11px 16px;
+      border-bottom: 3px solid transparent;
+      transition: color .15s, border-color .15s;
+    }
+
+    .tab-nav a:hover { color: #c5d4ec; }
+    .tab-nav a.active { color: #ffffff; border-bottom-color: var(--accent); }
+
+    .content { padding: 48px 48px; }
+
+    .book-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      gap: 24px;
+    }
+
+    .book-item {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .book-cover {
+      width: 100%;
+      aspect-ratio: 2/3;
+      border-radius: 6px;
+      object-fit: cover;
+      box-shadow: 0 4px 12px rgba(26,39,68,.18);
+      background: var(--line);
+      transition: transform .15s, box-shadow .15s;
+    }
+
+    .book-item:hover .book-cover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 20px rgba(26,39,68,.22);
+    }
+
+    .book-cover-placeholder {
+      width: 100%;
+      aspect-ratio: 2/3;
+      border-radius: 6px;
+      background: var(--accent-soft);
+      border: 1.5px solid var(--line);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      color: var(--accent);
+    }
+
+    .book-title {
+      font-size: .88rem;
+      font-weight: 600;
+      color: var(--text);
+      line-height: 1.35;
+    }
+
+    .book-author {
+      font-size: .78rem;
+      color: var(--muted);
+    }
+
+    @media (max-width: 700px) {
+      .content { padding: 28px 24px; }
+      header { padding: 28px 24px; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <h1>Books I Am Reading</h1>
+    <p class="header-sub">Current reads and recent favorites</p>
+  </header>
+
+  <nav class="tab-nav">
+    <a href="index.html">Resume</a>
+    <a href="courses.html">Courses</a>
+    <a href="side-projects.html">Side Projects</a>
+    <a href="books.html" class="active">Books I Am Reading</a>
+  </nav>
+
+  <div class="content">
+    <div class="book-grid" id="bookGrid">
+
+      <div class="book-item" data-title="The Smartest Guys in the Room">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">The Smartest Guys in the Room</div>
+        <div class="book-author">Bethany McLean, Peter Elkind</div>
+      </div>
+
+      <div class="book-item" data-title="Going Infinite">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Going Infinite</div>
+        <div class="book-author">Michael Lewis</div>
+      </div>
+
+      <div class="book-item" data-title="Read Write Own">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Read Write Own</div>
+        <div class="book-author">Chris Dixon</div>
+      </div>
+
+      <div class="book-item" data-title="Predicting Semiconductor Business Trends After Moore's Law">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Predicting Semiconductor Business Trends After Moore's Law</div>
+        <div class="book-author">Dr. Walden Rhines</div>
+      </div>
+
+      <div class="book-item" data-title="Pearls of Wisdom from Rabbi Yehonatan Eybeshitz">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Pearls of Wisdom from Rabbi Yehonatan Eybeshitz</div>
+        <div class="book-author">Rabbi Yehonatan Eybeshitz, Rabbi Yacov Barber</div>
+      </div>
+
+      <div class="book-item" data-title="Manifestation Through the 12 Laws of the Universe">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Manifestation Through the 12 Laws of the Universe</div>
+        <div class="book-author">Belle Motley</div>
+      </div>
+
+      <div class="book-item" data-title="Signs The Secret Language of the Universe">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Signs: The Secret Language of the Universe</div>
+        <div class="book-author">Laura Lynne Jackson</div>
+      </div>
+
+      <div class="book-item" data-title="The War of Art">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">The War of Art</div>
+        <div class="book-author">Steven Pressfield, Shawn Coyne</div>
+      </div>
+
+      <div class="book-item" data-title="The Black Swan Nassim Taleb">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">The Black Swan</div>
+        <div class="book-author">Nassim Nicholas Taleb</div>
+      </div>
+
+      <div class="book-item" data-title="The Steinsaltz Tanya Likkutei Amarim">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">The Steinsaltz Tanya</div>
+        <div class="book-author">Adin Even-Israel Steinsaltz</div>
+      </div>
+
+      <div class="book-item" data-title="Letters from a Stoic Seneca">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Letters from a Stoic</div>
+        <div class="book-author">Lucius Annaeus Seneca</div>
+      </div>
+
+      <div class="book-item" data-title="Gödel Escher Bach An Eternal Golden Braid">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Gödel, Escher, Bach: An Eternal Golden Braid</div>
+        <div class="book-author">Douglas R. Hofstadter</div>
+      </div>
+
+      <div class="book-item" data-title="Rav Kook Orot">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Rav Kook's Orot</div>
+        <div class="book-author">Rav Abraham Isaac Kook</div>
+      </div>
+
+      <div class="book-item" data-title="From Infinity to Man Kabbalah Information Theory Shyfrin">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">From Infinity to Man</div>
+        <div class="book-author">Eduard Shyfrin</div>
+      </div>
+
+      <div class="book-item" data-title="The Relativity of Death Kabbalah Information Shyfrin">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">The Relativity of Death</div>
+        <div class="book-author">Eduard Shyfrin</div>
+      </div>
+
+      <div class="book-item" data-title="Koren Rav Kook Siddur">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Koren Rav Kook Siddur</div>
+        <div class="book-author">Avraham Yitzhak Hakohen Kook</div>
+      </div>
+
+      <div class="book-item" data-title="Secrets of the Future Temple Mishkney Elyon">
+        <div class="book-cover-placeholder">📖</div>
+        <div class="book-title">Secrets of the Future Temple — Mishkney Elyon</div>
+        <div class="book-author">Moshe Chaim Luzzatto</div>
+      </div>
+
+    </div>
+  </div>
+
+  <script>
+    async function loadCover(item) {
+      const title = item.dataset.title;
+      const placeholder = item.querySelector('.book-cover-placeholder');
+      const q = encodeURIComponent(title);
+      try {
+        const res = await fetch(`https://openlibrary.org/search.json?title=${q}&limit=1&fields=cover_i`);
+        const data = await res.json();
+        const coverId = data.docs?.[0]?.cover_i;
+        if (!coverId) return;
+        const img = document.createElement('img');
+        img.className = 'book-cover';
+        img.alt = title;
+        img.src = `https://covers.openlibrary.org/b/id/${coverId}-M.jpg`;
+        img.onerror = () => img.replaceWith(placeholder);
+        placeholder.replaceWith(img);
+      } catch {}
+    }
+
+    document.querySelectorAll('.book-item').forEach(loadCover);
+  </script>
+
+</div>
+</body>
+</html>

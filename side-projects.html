@@ -109,6 +109,44 @@
       margin: 0 auto;
     }
 
+    /* PROJECT GRID */
+    .projects-grid {
+      display: flex;
+      flex-direction: column;
+      gap: 24px;
+    }
+
+    .project-card {
+      background: var(--white);
+      border: 1.5px solid var(--line);
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(26,39,68,.07);
+      transition: box-shadow .15s, border-color .15s;
+    }
+
+    .project-card:hover {
+      border-color: var(--accent);
+      box-shadow: 0 4px 16px rgba(46,111,206,.15);
+    }
+
+    .project-card-title {
+      background: var(--navy);
+      color: var(--white);
+      font-size: .85rem;
+      font-weight: 700;
+      letter-spacing: .5px;
+      text-transform: uppercase;
+      padding: 10px 18px;
+    }
+
+    .project-card-body {
+      padding: 20px 18px;
+      min-height: 80px;
+      color: var(--muted);
+      font-size: .9rem;
+    }
+
     @media (max-width: 700px) {
       .content { padding: 28px 24px; }
       header { padding: 28px 24px; }
@@ -127,13 +165,15 @@
     <a href="index.html">Resume</a>
     <a href="courses.html">Courses</a>
     <a href="side-projects.html" class="active">Side Projects</a>
+    <a href="books.html">Books I Am Reading</a>
   </nav>
 
   <div class="content">
-    <div class="empty-state">
-      <div class="empty-icon">🛠</div>
-      <h2>Coming Soon</h2>
-      <p>Side projects will be listed here.</p>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-card-title">VitalCap</div>
+        <div class="project-card-body">My personal software for enterprise resilience. Coming soon.</div>
+      </div>
     </div>
   </div>
 
