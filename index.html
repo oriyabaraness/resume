@@ -31,12 +31,48 @@
 
     /* ── LAYOUT ── */
     .page {
+      position: relative;
       max-width: 900px;
       margin: 40px auto;
       background: var(--white);
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 4px 32px rgba(26,39,68,.12);
+    }
+
+    .language-switcher {
+      position: absolute;
+      top: 14px;
+      right: 16px;
+      z-index: 5;
+      display: flex;
+      gap: 2px;
+      padding: 3px;
+      border: 1px solid rgba(255,255,255,.22);
+      border-radius: 8px;
+      background: rgba(255,255,255,.12);
+    }
+
+    .language-switcher button {
+      appearance: none;
+      border: 0;
+      border-radius: 6px;
+      min-width: 48px;
+      height: 28px;
+      padding: 0 10px;
+      background: transparent;
+      color: #c5d4ec;
+      cursor: pointer;
+      font: inherit;
+      font-size: .76rem;
+      font-weight: 700;
+    }
+
+    .language-switcher button:hover { color: var(--white); }
+
+    .language-switcher button.active {
+      background: var(--white);
+      color: var(--navy);
     }
 
     /* ── HEADER ── */
@@ -340,14 +376,67 @@
       .body { grid-template-columns: 1fr; }
       aside { border-top: 1px solid var(--line); }
       main { border-right: none; }
-      header { padding: 28px 24px; flex-direction: column; align-items: flex-start; gap: 16px; }
+      header { padding: 62px 24px 28px; flex-direction: column; align-items: flex-start; gap: 16px; }
       .header-photo { width: 80px; height: 80px; }
       main, aside { padding: 24px; }
+      .tab-nav { padding: 0 16px; overflow-x: auto; }
+      .language-switcher { top: 12px; right: 12px; }
+    }
+
+    body.rtl { direction: rtl; }
+
+    body.rtl .language-switcher {
+      direction: ltr;
+      right: 16px;
+      left: auto;
+    }
+
+    body.rtl main {
+      border-right: none;
+      border-left: 1px solid var(--line);
+    }
+
+    body.rtl .section-title,
+    body.rtl .aside-title,
+    body.rtl .tab-nav a {
+      letter-spacing: 0;
+    }
+
+    body.rtl .job ul li,
+    body.rtl .role-list li,
+    body.rtl .award-item {
+      padding-left: 0;
+      padding-right: 14px;
+    }
+
+    body.rtl .job ul li::before,
+    body.rtl .role-list li::before,
+    body.rtl .award-item::before {
+      left: auto;
+      right: 0;
+    }
+
+    body.rtl .job ul li::before,
+    body.rtl .role-list li::before {
+      content: '◂';
+    }
+
+    body.rtl .info-list li .label {
+      min-width: 86px;
+    }
+
+    @media (max-width: 680px) {
+      body.rtl main { border-left: none; }
+      body.rtl .language-switcher { right: 12px; }
     }
   </style>
 </head>
 <body>
 <div class="page">
+  <div class="language-switcher" aria-label="Language selector">
+    <button type="button" class="active" data-lang-option="en" aria-pressed="true">EN</button>
+    <button type="button" data-lang-option="he" aria-pressed="false">עברית</button>
+  </div>
 
   <!-- HEADER -->
   <header>
@@ -551,5 +640,155 @@
     </aside>
   </div>
 </div>
+<script>
+  const hebrewText = {
+    "Oriya Baraness": "אוריה ברנס",
+    "Enterprise Resilience | Operational Risk | Critical Infrastructure | Security Strategy": "חוסן ארגוני | סיכון תפעולי | תשתיות קריטיות | אסטרטגיית ביטחון",
+    "Tel Aviv, Israel": "תל אביב, ישראל",
+    "Canadian & Israeli Citizen": "אזרחות קנדית וישראלית",
+    "Resume": "קורות חיים",
+    "Courses": "קורסים",
+    "Side Projects": "פרויקטים צדדיים",
+    "Books I Am Reading": "ספרים שאני קוראת",
+    "Professional Summary": "תקציר מקצועי",
+    "Enterprise resilience and security professional with experience spanning financial services, government, and national security environments. Specialized in operational resilience, business continuity, critical infrastructure protection, crisis management, and geopolitical risk analysis. Proven ability to coordinate cross-functional stakeholders, develop contingency frameworks, and support enterprise resilience initiatives in highly regulated and high-risk environments including Citi Bank Israel and the Canadian Department of National Defence. Experienced in cyber-adjacent risk management, OSINT research, strategic policy development, and operational continuity planning. Strong background working with senior government officials, financial institutions, and intergovernmental stakeholders on resilience governance and security initiatives.": "מומחית בחוסן ארגוני ובביטחון עם ניסיון במגזר הפיננסי, בממשל ובסביבות ביטחון לאומי. מתמחה בחוסן תפעולי, המשכיות עסקית, הגנת תשתיות קריטיות, ניהול משברים וניתוח סיכונים גיאופוליטיים. בעלת יכולת מוכחת לתאם בין בעלי עניין חוצי-ארגון, לפתח מסגרות היערכות והמשכיות, ולתמוך ביוזמות חוסן ארגוני בסביבות עתירות רגולציה וסיכון, כולל Citi Bank Israel ומשרד ההגנה הלאומית של קנדה. ניסיון בניהול סיכוני סייבר משיקים, מחקר OSINT, פיתוח מדיניות אסטרטגית ותכנון המשכיות תפעולית. רקע חזק בעבודה עם בכירי ממשל, מוסדות פיננסיים ובעלי עניין בין-ממשלתיים ביוזמות ממשל חוסן וביטחון.",
+    "Professional Experience": "ניסיון מקצועי",
+    "Business Continuity & Enterprise Resilience Coordinator": "מתאמת המשכיות עסקית וחוסן ארגוני",
+    "CitiBank Israel — Tel Aviv, Israel": "CitiBank Israel — תל אביב, ישראל",
+    "Jun 2024 – Present": "יוני 2024 - היום",
+    "Lead enterprise resilience and operational continuity initiatives for Citi Israel's banking operations and Innovation Lab in alignment with Bank of Israel regulatory requirements and global Citi resilience standards.": "מובילה יוזמות חוסן ארגוני והמשכיות תפעולית עבור פעילות הבנקאות ומעבדת החדשנות של Citi Israel, בהתאם לדרישות הרגולציה של בנק ישראל ולסטנדרטים הגלובליים של Citi לחוסן.",
+    "Develop crisis response and contingency frameworks addressing warfare scenarios, cyber incidents, operational disruptions, and third-party outages across 15+ business units including Markets, Securities Services, Treasury Trade Solutions, Technology, Client Onboarding, and Private Wealth.": "מפתחת מסגרות תגובה למשברים והיערכות לתרחישי לחימה, אירועי סייבר, שיבושים תפעוליים והשבתות ספקים חיצוניים, על פני יותר מ-15 יחידות עסקיות ובהן Markets, Securities Services, Treasury Trade Solutions, Technology, Client Onboarding ו-Private Wealth.",
+    "Coordinate enterprise-wide Denial of Service/Denial of Access (DoS/DoA) testing, resilience exercises, and recovery planning initiatives involving internal stakeholders and external financial ecosystem partners including MASAV, TASE, and Bloomberg.": "מתאמת בדיקות Denial of Service/Denial of Access (DoS/DoA), תרגילי חוסן ותכנון התאוששות ברמה ארגונית, בשיתוף בעלי עניין פנימיים ושותפים חיצוניים באקו-סיסטם הפיננסי, כולל MASAV, TASE ו-Bloomberg.",
+    "Conduct dependency mapping, application risk assessments, alternate-site planning, and recovery strategy reviews to strengthen operational recovery capabilities and reduce business disruption risks.": "מבצעת מיפוי תלויות, הערכות סיכון לאפליקציות, תכנון אתרים חלופיים וסקירות אסטרטגיות התאוששות כדי לחזק יכולות התאוששות תפעוליות ולצמצם סיכוני שיבוש עסקי.",
+    "Support resilience governance initiatives by partnering with technology, operations, compliance, and business leadership to identify remediation priorities and strengthen continuity preparedness.": "תומכת ביוזמות ממשל חוסן באמצעות שותפות עם טכנולוגיה, תפעול, ציות והנהלה עסקית לזיהוי סדרי עדיפויות לתיקון ולחיזוק מוכנות להמשכיות.",
+    "Manage continuity planning documentation, recovery procedures, and resilience reporting while supporting alignment with operational risk and regulatory expectations.": "מנהלת תיעוד תכנון המשכיות, נהלי התאוששות ודיווחי חוסן, תוך תמיכה בהתאמה לציפיות סיכון תפעולי ורגולציה.",
+    "Senior Corporate Officer – Business Continuity & Resilience": "קצינה ארגונית בכירה - המשכיות עסקית וחוסן",
+    "Department of National Defence — Ottawa, Canada": "משרד ההגנה הלאומית של קנדה — אוטווה, קנדה",
+    "Jun 2022 – Nov 2024": "יוני 2022 - נוב׳ 2024",
+    "Supported continuity and recovery planning for critical government operations, military assets, and intergovernmental communication infrastructure within the Vice Chief of the Defence Staff Group.": "תמכה בתכנון המשכיות והתאוששות עבור פעילויות ממשלתיות קריטיות, נכסים צבאיים ותשתיות תקשורת בין-ממשלתיות במסגרת קבוצת סגן ראש מטה ההגנה.",
+    "Collaborated with senior stakeholders across the Canadian Armed Forces, Treasury Board Secretariat, and Global Affairs Canada to strengthen resilience governance and continuity coordination across domestic and international operations.": "שיתפה פעולה עם בעלי עניין בכירים בצבא קנדה, במזכירות מועצת האוצר וב-Global Affairs Canada כדי לחזק ממשל חוסן ותיאום המשכיות בפעילות פנים וחוץ.",
+    "Co-authored resilience directives, continuity policies, risk mitigation procedures, and operational guidance supporting compliance with Treasury Board business continuity planning requirements.": "הייתה שותפה לכתיבת הנחיות חוסן, מדיניות המשכיות, נהלי הפחתת סיכונים והדרכה תפעולית שתמכו בעמידה בדרישות תכנון המשכיות עסקית של Treasury Board.",
+    "Led resilience workshops, continuity planning sessions, and tabletop exercises for senior military leadership focused on crisis preparedness, operational continuity, and emergency response coordination.": "הובילה סדנאות חוסן, מפגשי תכנון המשכיות ותרגילי שולחן להנהגה צבאית בכירה, עם דגש על מוכנות למשברים, המשכיות תפעולית ותיאום תגובה לחירום.",
+    "Supported redundancy planning and operational recovery efforts for critical communication networks and high-priority government services to minimize disruption during crisis scenarios.": "תמכה בתכנון יתירות ובמאמצי התאוששות תפעולית עבור רשתות תקשורת קריטיות ושירותי ממשלה בעדיפות גבוהה, כדי לצמצם שיבושים בעת משבר.",
+    "Managed annual continuity planning coordination activities, resilience reporting, and cross-functional stakeholder engagement for senior defence leadership teams.": "ניהלה פעילויות שנתיות לתיאום תכנון המשכיות, דיווחי חוסן ומעורבות בעלי עניין חוצת-ארגון עבור צוותי הנהגה בכירים בתחום ההגנה.",
+    "Research Analyst": "אנליסטית מחקר",
+    "Government of Canada – House of Commons — Ottawa, Canada": "ממשלת קנדה - בית הנבחרים — אוטווה, קנדה",
+    "Oct 2021 – Apr 2022": "אוק׳ 2021 - אפר׳ 2022",
+    "Conducted policy analysis and expenditure reviews related to federal government operations, Treasury Board initiatives, and parliamentary committee activities.": "ביצעה ניתוח מדיניות ובחינות הוצאה הקשורות לפעילות הממשל הפדרלי, יוזמות Treasury Board ופעילות ועדות פרלמנטריות.",
+    "Prepared research briefs, investigative reports, and legislative documentation related to geopolitical issues, government operations, and federal expenditures.": "הכינה תקצירי מחקר, דוחות חקירה ותיעוד חקיקתי בנושאים גיאופוליטיים, פעילות ממשלתית והוצאות פדרליות.",
+    "Managed constituent inquiries related to immigration, employment insurance, COVID-related federal benefits, and public service matters while ensuring accurate and timely support.": "ניהלה פניות ציבור בנושאי הגירה, ביטוח תעסוקה, הטבות פדרליות הקשורות לקורונה ושירות ציבורי, תוך הבטחת מענה מדויק ובזמן.",
+    "Performed investigative and policy research supporting parliamentary decision-making and public transparency initiatives.": "ביצעה מחקר חקירתי ומדיניות שתמך בקבלת החלטות פרלמנטרית וביוזמות שקיפות ציבורית.",
+    "OSINT & Extremism Research Analyst": "אנליסטית מחקר OSINT וקיצוניות",
+    "Organization for the Prevention of Violence — Edmonton, Canada": "הארגון למניעת אלימות — אדמונטון, קנדה",
+    "May 2020 – Jun 2021": "מאי 2020 - יוני 2021",
+    "Conducted open-source intelligence (OSINT) research focused on extremism, hate movements, online radicalization, and counterterrorism-related trends.": "ביצעה מחקר מודיעין ממקורות גלויים (OSINT) שהתמקד בקיצוניות, תנועות שנאה, הקצנה מקוונת ומגמות הקשורות ללוחמה בטרור.",
+    "Supported strategic assessments and evidence-based research initiatives related to fringe ideologies and digital threat narratives.": "תמכה בהערכות אסטרטגיות וביוזמות מחקר מבוססות ראיות הקשורות לאידיאולוגיות שוליים ולנרטיבים של איום דיגיטלי.",
+    "Analyzed online platforms and digital communities to identify emerging extremist narratives and behavioral patterns.": "ניתחה פלטפורמות מקוונות וקהילות דיגיטליות כדי לזהות נרטיבים קיצוניים מתפתחים ודפוסי התנהגות.",
+    "Translated multilingual source material from Russian, Ukrainian, and German into English to support security and policy research initiatives.": "תרגמה חומרי מקור מרוסית, אוקראינית וגרמנית לאנגלית כדי לתמוך ביוזמות מחקר ביטחוני ומדיניות.",
+    "Target Roles": "תפקידי יעד",
+    "Business Continuity Manager": "מנהלת המשכיות עסקית",
+    "Enterprise Resilience Manager": "מנהלת חוסן ארגוני",
+    "Operational Risk Manager": "מנהלת סיכון תפעולי",
+    "Crisis Management Specialist": "מומחית ניהול משברים",
+    "Critical Infrastructure Protection Analyst": "אנליסטית הגנת תשתיות קריטיות",
+    "Geopolitical & Security Risk Analyst": "אנליסטית סיכונים גיאופוליטיים וביטחוניים",
+    "Intelligence / OSINT Analyst": "אנליסטית מודיעין / OSINT",
+    "Security Policy Advisor": "יועצת מדיניות ביטחון",
+    "Resilience Program Manager": "מנהלת תוכנית חוסן",
+    "Third-Party Risk Manager": "מנהלת סיכוני צד שלישי",
+    "Core Competencies": "כישורי ליבה",
+    "Operational Resilience": "חוסן תפעולי",
+    "Business Continuity": "המשכיות עסקית",
+    "Enterprise Risk Mgmt": "ניהול סיכונים ארגוני",
+    "Crisis Management": "ניהול משברים",
+    "Critical Infrastructure": "תשתיות קריטיות",
+    "Geopolitical Risk": "סיכון גיאופוליטי",
+    "OSINT Research": "מחקר OSINT",
+    "Regulatory Compliance": "עמידה ברגולציה",
+    "Cybersecurity Governance": "ממשל סייבר",
+    "Dependency Mapping": "מיפוי תלויות",
+    "Incident Response": "תגובה לאירועים",
+    "Risk Assessment": "הערכת סיכונים",
+    "Stakeholder Management": "ניהול בעלי עניין",
+    "Continuity Testing": "בדיקות המשכיות",
+    "Policy Development": "פיתוח מדיניות",
+    "Third-Party Risk": "סיכוני צד שלישי",
+    "Crisis Coordination": "תיאום משברים",
+    "Data Analytics": "ניתוח נתונים",
+    "Education": "השכלה",
+    "M.A. Infrastructure Protection & International Security": "תואר שני בהגנת תשתיות וביטחון בינלאומי",
+    "Carleton University — Ottawa, Canada": "אוניברסיטת קרלטון — אוטווה, קנדה",
+    "Sept 2021 – Jun 2023": "ספט׳ 2021 - יוני 2023",
+    "View Courses →": "צפייה בקורסים ←",
+    "B.A. Political Science & Psychology Minor": "תואר ראשון במדע המדינה עם חטיבה בפסיכולוגיה",
+    "University of Alberta — Edmonton, Canada": "אוניברסיטת אלברטה — אדמונטון, קנדה",
+    "Sept 2019 – Jun 2021": "ספט׳ 2019 - יוני 2021",
+    "Awards & Development": "פרסים ופיתוח מקצועי",
+    "Co-op Student of the Year — Vice Chief of Defence Staff Group, DND (2022)": "סטודנטית Co-op של השנה — קבוצת סגן ראש מטה ההגנה, DND (2022)",
+    "NATO School Oberammergau — Germany (2023)": "בית הספר של נאט״ו באוברמרגאו — גרמניה (2023)",
+    "Nominee, Carleton University Research Grant on Smart Cities & Risks (2021)": "מועמדות למענק מחקר של אוניברסיטת קרלטון בנושא ערים חכמות וסיכונים (2021)",
+    "Rogers Smith Undergraduate Research Grant, University of Alberta (2021)": "מענק מחקר לתואר ראשון על שם Rogers Smith, אוניברסיטת אלברטה (2021)",
+    "Additional Information": "מידע נוסף",
+    "Clearance": "סיווג",
+    "Active Canadian Security Clearance (NATO)": "סיווג ביטחוני קנדי פעיל (נאט״ו)",
+    "Languages": "שפות",
+    "English (Native), Hebrew (Native), French (Intermediate)": "אנגלית (שפת אם), עברית (שפת אם), צרפתית (רמת ביניים)",
+    "Tools": "כלים",
+    "Claude Code, Power BI, STATA, Microsoft Excel, D365, Fusion Risk Management": "Claude Code, Power BI, STATA, Microsoft Excel, D365, Fusion Risk Management",
+    "Citizenship": "אזרחות",
+    "Canadian & Israeli": "קנדית וישראלית"
+  };
+
+  const pageTitles = {
+    en: "Oriya Baraness — Resume",
+    he: "אוריה ברנס — קורות חיים"
+  };
+
+  const normalizeText = (value) => value.replace(/\s+/g, " ").trim();
+  const translatableNodes = [];
+  const walker = document.createTreeWalker(document.querySelector(".page"), NodeFilter.SHOW_TEXT);
+
+  while (walker.nextNode()) {
+    const node = walker.currentNode;
+    const key = normalizeText(node.textContent);
+    if (hebrewText[key]) {
+      translatableNodes.push({
+        node,
+        key,
+        original: node.textContent,
+        leading: node.textContent.match(/^\s*/)[0],
+        trailing: node.textContent.match(/\s*$/)[0]
+      });
+    }
+  }
+
+  const setLanguage = (lang) => {
+    const isHebrew = lang === "he";
+    document.documentElement.lang = lang;
+    document.documentElement.dir = isHebrew ? "rtl" : "ltr";
+    document.body.classList.toggle("rtl", isHebrew);
+    document.title = pageTitles[lang];
+
+    translatableNodes.forEach(({ node, key, original, leading, trailing }) => {
+      node.textContent = isHebrew ? `${leading}${hebrewText[key]}${trailing}` : original;
+    });
+
+    document.querySelectorAll("[data-lang-option]").forEach((button) => {
+      const active = button.dataset.langOption === lang;
+      button.classList.toggle("active", active);
+      button.setAttribute("aria-pressed", active ? "true" : "false");
+    });
+
+    localStorage.setItem("resumeLanguage", lang);
+  };
+
+  document.querySelectorAll("[data-lang-option]").forEach((button) => {
+    button.addEventListener("click", () => setLanguage(button.dataset.langOption));
+  });
+
+  const requestedLanguage = new URLSearchParams(window.location.search).get("lang");
+  const savedLanguage = localStorage.getItem("resumeLanguage");
+  setLanguage(requestedLanguage === "he" || savedLanguage === "he" ? "he" : "en");
+</script>
 </body>
 </html>
